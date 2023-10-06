@@ -1,0 +1,194 @@
+body {
+  /* padding: 10px; */
+  font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
+  /* background-color: #36454f; */
+  background-color: #2c2f33;
+
+  color:white;
+}
+
+
+
+.title{
+  font-family: 'Caveat', cursive;
+font-size: 4rem;
+margin-top: 3rem;
+display: flex;
+margin-bottom: 2rem;
+}
+.flex-container{
+  display: flex;
+  justify-content: center;
+  margin:10px;
+  margin-bottom: 15px;
+}
+
+.header{
+  display: flex;
+  justify-content: center;
+  margin:10px;
+  margin-bottom: 15px;
+  position: relative;
+}
+
+.download{
+  position: absolute;
+
+  right: 0;
+}
+#sheet{
+  border: solid 2px black;
+  background-color: white;
+}
+.round-button{
+  border-radius: 50%;
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+  margin-right: 10px;
+}
+.round-button:hover{
+  opacity: 80%;
+}
+.red{
+  background-color: red;
+  border: 1px solid crimson;
+}
+.green{
+  background-color: green;
+  border: 1px solid mediumseagreen;
+}
+.blue{
+  background-color: blue;
+  border: 1px solid midnightblue;
+}
+.selected{
+  border: solid 3px white;
+}
+
+.pink{
+  background-color: pink;
+  border: 1px solid rgb(164, 123, 130);
+}
+.purple{
+  background-color: #9033FF;
+  border: 1px solid #581da0;
+}
+.orange{
+  background-color: #FF9633;
+  border: 1px solid #a66120;
+}
+.cyan{
+  background-color: #33ECFF;
+  border: 1px solid #2199a7;
+}
+.yellow{
+  background-color: #FFF633;
+  border: 1px solid #b9b229;
+}
+
+.color-choice{
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-evenly;
+  /* justify-content: center; */
+  width: 60%;
+  margin-bottom: 2rem;
+}
+
+.color-container{
+  display: flex;
+  margin: 0 auto;
+  align-items: center;
+  grid-area: 2rem;
+  justify-content: center;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.export-button{
+  cursor: pointer;
+  margin-right: 1rem;
+}
+
+
+/* CSS */
+.button-89 {
+  --b: 3px;   /* border thickness */
+  --s: .45em; /* size of the corner */
+  --color: #ffffff;
+  cursor: pointer;
+  padding: calc(.5em + var(--s)) calc(.9em + var(--s));
+  color: var(--color);
+  --_p: var(--s);
+  background:
+    conic-gradient(from 90deg at var(--b) var(--b),#0000 90deg,var(--color) 0)
+    var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
+  transition: .3s linear, color 0s, background-color 0s;
+  outline: var(--b) solid #ffffff00;
+  outline-offset: .6em;
+  font-size: 16px;
+margin: 1rem;
+  border: 0;
+  font-size: 1.5rem;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  font-family: 'Patrick Hand', cursive;
+}
+
+.button-89:hover,
+.button-89:focus-visible{
+  --_p: 0px;
+  outline-color: var(--color);
+  outline-offset: .05em;
+}
+
+.button-89:active {
+  background: var(--color);
+  color: #fff;
+}
+
+#resetCanvasButton {
+  --b: 3px;   /* border thickness */
+  --s: .45em; /* size of the corner */
+  --color: #ffffff;
+  cursor: pointer;
+  padding: calc(.5em + var(--s)) calc(.9em + var(--s));
+  color: var(--color);
+  --_p: var(--s);
+  background:
+    conic-gradient(from 90deg at var(--b) var(--b),#0000 90deg,var(--color) 0)
+    var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
+  transition: .3s linear, color 0s, background-color 0s;
+  outline: var(--b) solid #ffffff00;
+  outline-offset: .6em;
+  font-size: 16px;
+margin: 1rem;
+  border: 0;
+  font-size: 1.5rem;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  font-family: 'Patrick Hand', cursive;
+}
+
+#resetCanvasButton:hover,
+#resetCanvasButton:focus-visible{
+  --_p: 0px;
+  outline-color: var(--color);
+  outline-offset: .05em;
+}
+
+#resetCanvasButton:active {
+  background: var(--color);
+  color: #fff;
+
+}
+
+
+#theimage{
+  height: 1700px;
+  width: 750px;
+  
+}
