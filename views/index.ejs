@@ -1,195 +1,233 @@
 <!DOCTYPE html>
-<html style="font-size: 12px;">
+<html style="font-size: 12px">
   <head>
     <title><%= title %></title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Jua&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Jua&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <div class="header">
-      <div class="title">DigiDraw <div style="margin-left: 1rem;"> <i class="fa-solid fa-pencil fa-lg" style="color: #ffffff; "></i></div></h1>
-      <div class="download"> 
-        <div class="export-button" onclick="exportAsPNG()"><i class="fa-solid fa-download fa-sm" style="color: #ffffff;"></i> </div>
-
+    <div class="sidebar">
+      <div class="menu-icon">
+        <i class="fa-solid fa-bars fa-2xl" style="color: #ffffff"></i>
       </div>
-     </div>
-    </div>
-       
-  <!-- Add a video element to display the screen capture -->
-<video id="screen-capture" style="display: none;" autoplay></video>
-
-<!-- Add a canvas element to capture video frames -->
-<canvas id="video-canvas-new" style="display: none;"></canvas>
-<a id="download-button" style="display: block;" download="captured-video.webm">
-  Download Video
-</a>
-<div class="button-group">
-  <button id="btn-start" type="button" class="button">Start Streaming</button>
-  <button id="btn-stop" type="button" class="button">Stop Streaming</button>
-  <button id="btn-capture" type="button" class="button">Capture Image</button>
-  <button id="set-background-btn">Set Background</button>
-
-</div>
-
-
-
-
-<button id="btn-capture-screen">Capture Screen</button>
-
-
-
-<video id="screen-capture" autoplay></video>
-
-<video id="captured-video" autoplay></video>
-
-
-<a id="download-button" style="display: none;" download="captured-video.webm">
-  Download Video
-</a>
-
-
-
-<video id="myvideo" width="320" height="240" muted></video>  
-<button id="photo-button" class="btn btn-dark">
-  <i class="fa-solid fa-camera"></i> Take Photo
-</button>   
-<canvas id="video-canvas" width="1700" height="750"></canvas>
-<div class="flex-container">
- <div>
-   <img id="theimage">
-
-   <canvas id="sheet" width="1700" height="750"></canvas>
- </div>
-
-
-</div>
-
-    <div class="color-choice">
-      <div>
-        <button
-          class="round-button red selected"
-          onclick="selectColor('red')"
-        ></button>
-      </div>
-
-
-      <div>
-        <button
-          class="round-button green"
-          onclick="selectColor('green')"
-        ></button>
-      </div>
-
-
-      <div>
-        <button
-          class="round-button blue"
-          onclick="selectColor('blue')"
-        ></button>
-      </div>
-
-      <div>
-        <button
-          class="round-button pink"
-          onclick="selectColor('pink')"
-        ></button>
-      </div>
-
-      <div>
-        <button
-          class="round-button yellow"
-          onclick="selectColor('yellow')"
-        ></button>
-      </div>
-
-      <div>
-        <button
-          class="round-button purple"
-          onclick="selectColor('purple')"
-        ></button>
-      </div>
-        <div>
-          <button
-            class="round-button cyan"
-            onclick="selectColor('cyan')"
-          ></button>
+      <div class="nav-bar">
+        <div class="nav-items">
+          <div class="button-content">
+            <div class="icon">
+              <i class="fa-solid fa-display fa-lg" style="color: #ffffff"></i>
+            </div>
+            <span><button id="btn-capture-screen">Capture Screen</button></span>
+          </div>
         </div>
-        <div>
-          <button
-            class="round-button orange"
-            onclick="selectColor('orange')"
-          ></button>
+
+        <div class="nav-items" onclick="exportAsPNG()">
+          <div class="button-content">
+            <div class="icon">
+              <i
+                class="fa-solid fa-file-arrow-down fa-lg"
+                style="color: #ffffff"
+              ></i>
+            </div>
+            Download Photo
+          </div>
         </div>
-  
+
+        <div class="nav-items">
+          <div class="button-content" id="startStopContainer">
+            <button id="start" style="display: flex">
+              <div class="icon">
+                <i
+                  class="fa-solid fa-circle-play fa-lg"
+                  style="color: #ffffff"
+                ></i>
+              </div>
+              Start
+            </button>
+            <button id="stop">
+              <div class="icon">
+                <i class="fa-solid fa-stop fa-lg" style="color: #ffffff"></i>
+              </div>
+              Stop
+            </button>
+          </div>
+        </div>
+        <div class="nav-items">
+          <div class="button-content">
+            <button id="photo-button">
+              <div class="icon">
+                <i class="fa-solid fa-camera fa-lg" style="color: #ffffff"></i>
+              </div>
+              Take Photo
+            </button>
+          </div>
+        </div>
+
+        <div class="nav-items" style="margin-top: 0;">
+          <div class="button-content">
+            <a
+              id="download-button"
+              style="
+                display: none;
+                text-decoration: underline #1f2224;
+                color: white;
+                display: none;
+              "
+              download="captured-video.webm"
+            >
+              <div class="icon">
+                <i
+                  class="fa-solid fa-download fa-lg"
+                  style="color: #ffffff"
+                ></i>
+              </div>
+              Download Video
+            </a>
+          </div>
+        </div>
       </div>
     </div>
-    
-   
-    <div class="color-container">
-      <button onclick="changeBackgroundPattern('blank')" id="resetCanvasButton">Clear drawing</button>
-      <button onclick="changeBackgroundPattern('dots')" class="button-89">Dots</button>
-      <button onclick="changeBackgroundPattern('paper')" class="button-89">Grid Paper</button>
-      <button onclick="changeBackgroundPattern('line')" class="button-89">line</button>
-      <button onclick="changeBackgroundPattern('grid')" class="button-89">Grid</button>
-      <button onclick="changeBackgroundPattern('paperTexture')" class="button-89">
-        Paper texture
-      </button>
-      <button onclick="changeBackgroundPattern('none')" class="button-89">No background</button>
-    </div>
+
+    <div class="big-flex">
+      <div class="header">
+        <div class="title">
+          DigiDraw
+          <div style="margin-left: 1rem">
+            <i class="fa-solid fa-pencil fa-lg" style="color: #ffffff"></i>
+          </div>
+        </div>
+      </div>
+      <div class="drawing-cont">
+        <div id="flex-container">
+          <canvas id="video-canvas" width="1700" height="750"></canvas>
+          <img id="theimage" />
+          <div class="video-drawing">
+            <div id="drawing-material" style="display: flex; flex-direction: column;">
+              <canvas id="sheet" width="1700" height="750" style="background-size: cover;"></canvas>
+              <div class="color-choice">
+                <div>
+                  <button
+                    class="round-button red selected"
+                    onclick="selectColor('red')"
+                  ></button>
+                </div>
+      
+                <div>
+                  <button
+                    class="round-button green"
+                    onclick="selectColor('green')"
+                  ></button>
+                </div>
+      
+                <div>
+                  <button
+                    class="round-button blue"
+                    onclick="selectColor('blue')"
+                  ></button>
+                </div>
+      
+                <div>
+                  <button
+                    class="round-button pink"
+                    onclick="selectColor('pink')"
+                  ></button>
+                </div>
+      
+                <div>
+                  <button
+                    class="round-button yellow"
+                    onclick="selectColor('yellow')"
+                  ></button>
+                </div>
+      
+                <div>
+                  <button
+                    class="round-button purple"
+                    onclick="selectColor('purple')"
+                  ></button>
+                </div>
+                <div>
+                  <button
+                    class="round-button cyan"
+                    onclick="selectColor('cyan')"
+                  ></button>
+                </div>
+                <div>
+                  <button
+                    class="round-button orange"
+                    onclick="selectColor('orange')"
+                  ></button>
+                </div>
+              </div>
+            </div>
+           
+            <video id="captured-video" autoplay></video>
+          </div>
+        </div>
 
   
+
+        <div class="color-container">
+          <button
+            onclick="changeBackgroundPattern('blank')"
+            id="resetCanvasButton"
+          >
+            Clear drawing
+          </button>
+          <button onclick="changeBackgroundPattern('dots')" class="button-89">
+            Dots
+          </button>
+          <button onclick="changeBackgroundPattern('paper')" class="button-89">
+            Grid Paper
+          </button>
+          <button onclick="changeBackgroundPattern('line')" class="button-89">
+            line
+          </button>
+          <button onclick="changeBackgroundPattern('grid')" class="button-89">
+            Grid
+          </button>
+          <button
+            onclick="changeBackgroundPattern('paperTexture')"
+            class="button-89"
+          >
+            Paper texture
+          </button>
+          <button onclick="changeBackgroundPattern('none')" class="button-89">
+            No background
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Add a video element to display the screen capture -->
+
+    <div class="buttons">
+      <video id="screen-capture" style="display: none" autoplay></video>
+      <!-- Add a canvas element to capture video frames -->
+      <canvas id="video-canvas-new" style="display: block"></canvas>
+      <video id="screen-capture" autoplay></video>
+      <!-- <video id="captured-video" autoplay></video> -->
+      <video id="myvideo" width="320" height="240" muted></video>
+      <canvas id="video-canvas" width="200" height="200"></canvas>
+    </div>
 
     <script>
-      // Add event listener for the file input
-const videoUploadInput = document.getElementById("video-upload");
-const uploadButton = document.getElementById("upload-button");
+      const navbtn = document.querySelector(".menu-icon");
+      const sidebar = document.querySelector(".sidebar");
 
-// uploadButton.addEventListener("click", () => {
-//   videoUploadInput.click();
-// });
+      navbtn.addEventListener("click", () => {
+        sidebar.classList.toggle("collapsed");
+      });
 
-videoUploadInput.addEventListener("change", handleVideoUpload);
-
-// Function to handle video upload
-function handleVideoUpload(event) {
-  const file = event.target.files[0];
-
-  if (file) {
-    const reader = new FileReader();
-
-    reader.onload = (e) => {
-      const videoData = e.target.result;
-
-      // Send the uploaded video data to the server via Socket.io
-      socket.emit("uploadVideo", videoData);
-
-      // Optionally, you can display the uploaded video to the user
-      displayUploadedVideo(videoData);
-    };
-
-    reader.readAsDataURL(file);
-  }
-}
-
-// Function to display the uploaded video to the user (optional)
-function displayUploadedVideo(videoData) {
-  const videoElement = document.createElement("video");
-  videoElement.src = videoData;
-  videoElement.controls = true;
-
-  // Append the video element to a container div
-  const uploadedVideoContainer = document.getElementById("uploaded-videos");
-  uploadedVideoContainer.appendChild(videoElement);
-}
-
-      // Example: Connect to the server (replace with your server URL)
-
-      // Function to export canvas as PNG and provide a download link
       function exportAsPNG() {
         const canvas = document.getElementById("sheet");
         const link = document.createElement("a");
@@ -199,66 +237,67 @@ function displayUploadedVideo(videoData) {
       }
 
       function resetCanvas() {
-  const canvas = document.getElementById("sheet");
-  const context = canvas.getContext("2d");
+        const canvas = document.getElementById("sheet");
+        const context = canvas.getContext("2d");
 
-  // Clear the canvas by filling it with the new background color
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  
-  // Set the new background color
-  canvas.style.backgroundColor = 'white';
-}
+        // Clear the canvas by filling it with the new background color
+        context.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Set the new background color
+        canvas.style.backgroundColor = "white";
+      }
       // Add a click event listener to the button
       const resetButton = document.getElementById("resetCanvasButton");
       resetButton.addEventListener("click", resetCanvas);
 
-      function changeBackgroundPattern(option) {
-        const contentContainer = document.getElementById("sheet");
-        const hasPattern = contentContainer.style.backgroundImage !== "none";
-        if (option === "dots") {
-          contentContainer.style.backgroundColor = "black";
-          contentContainer.style.opacity = "1";
-          contentContainer.style.backgroundImage =
-            "radial-gradient(#000000 0.65px, transparent 0.65px), radial-gradient(#000000 0.65px, #ffffff 0.65px)";
-          contentContainer.style.backgroundSize = "54px 54px";
-          contentContainer.style.backgroundPosition = "0 0, 27px 27px";
-        } else if (option === "blank") {
-          contentContainer.style.backgroundColor = "#ffffff";
-          contentContainer.style.backgroundImage="none"
-        } else if (option === "paper") {
-          contentContainer.style.backgroundColor = "#ffffff";
-          contentContainer.style.opacity = "1";
-          contentContainer.style.backgroundImage =
-            "linear-gradient(#000000 4px, transparent 4px), linear-gradient(90deg, #000000 4px, transparent 4px), linear-gradient(#000000 2px, transparent 2px), linear-gradient(90deg, #000000 2px, #ffffff 2px)";
-          contentContainer.style.backgroundSize =
-            "100px 100px, 100px 100px, 20px 20px, 20px 20px";
-          contentContainer.style.backgroundPosition =
-            "-4px -4px, -4px -4px, -2px -2px, -2px -2px";
-        } else if (option === "line") {
-          contentContainer.style.backgroundColor = "#ffffff";
-          contentContainer.style.opacity = "1";
-          contentContainer.style.backgroundImage =
-            " repeating-linear-gradient(0deg, #000000, #000000 1px, #ffffff 1px, #ffffff)";
-          contentContainer.style.backgroundSize = "20px 20px";
-        } else if (option === "grid") {
-          contentContainer.style.backgroundColor = "#ffffff";
-          contentContainer.style.opacity = "1";
-          contentContainer.style.backgroundImage =
-            " linear-gradient(#000000 1.3px, transparent 1.3px), linear-gradient(to right, #000000 1.3px, #ffffff 1.3px)";
-          contentContainer.style.backgroundSize = "26px 26px";
-        } else if (option === "paperTexture") {
-          contentContainer.style.backgroundColor = "#ffeee0";
-          contentContainer.style.backgroundImage =
-            'url("https://www.transparenttextures.com/patterns/textured-paper.png")';
-          contentContainer.style.backgroundSize = "auto";
-        }
-      }
-      
+      // function changeBackgroundPattern(option) {
+      //   const contentContainer = document.getElementById("sheet");
+      //   const hasPattern = contentContainer.style.backgroundImage !== "none";
+      //   if (option === "dots") {
+      //     contentContainer.style.backgroundColor = "white";
+      //     contentContainer.style.opacity = "1";
+      //     contentContainer.style.backgroundImage =
+      //       "radial-gradient(#000000 0.65px, transparent 0.65px), radial-gradient(#000000 0.65px, #ffffff 0.65px)";
+      //     contentContainer.style.backgroundSize = "54px 54px";
+      //     contentContainer.style.backgroundPosition = "0 0, 27px 27px";
+      //   } else if (option === "blank") {
+      //        contentContainer.style.backgroundColor = "#ffffff";
+      //     contentContainer.style.backgroundImage="none"
+      //   } else if (option === "paper") {
+      //     contentContainer.style.backgroundColor = "#ffffff";
+      //     contentContainer.style.opacity = "1";
+      //     contentContainer.style.backgroundImage =
+      //       "linear-gradient(#000000 4px, transparent 4px), linear-gradient(90deg, #000000 4px, transparent 4px), linear-gradient(#000000 2px, transparent 2px), linear-gradient(90deg, #000000 2px, #ffffff 2px)";
+      //     contentContainer.style.backgroundSize =
+      //       "100px 100px, 100px 100px, 20px 20px, 20px 20px";
+      //     contentContainer.style.backgroundPosition =
+      //       "-4px -4px, -4px -4px, -2px -2px, -2px -2px";
+      //   } else if (option === "line") {
+      //     contentContainer.style.backgroundColor = "#ffffff";
+      //     contentContainer.style.opacity = "1";
+      //     contentContainer.style.backgroundImage =
+      //       " repeating-linear-gradient(0deg, #000000, #000000 1px, #ffffff 1px, #ffffff)";
+      //     contentContainer.style.backgroundSize = "20px 20px";
+      //   } else if (option === "grid") {
+      //     contentContainer.style.backgroundColor = "#ffffff";
+      //     contentContainer.style.opacity = "1";
+      //     contentContainer.style.backgroundImage =
+      //       " linear-gradient(#000000 1.3px, transparent 1.3px), linear-gradient(to right, #000000 1.3px, #ffffff 1.3px)";
+      //     contentContainer.style.backgroundSize = "26px 26px";
+      //   } else if (option === "paperTexture") {
+      //     contentContainer.style.backgroundColor = "#ffeee0";
+      //     contentContainer.style.backgroundImage =
+      //       'url("https://www.transparenttextures.com/patterns/textured-paper.png")';
+      //     contentContainer.style.backgroundSize = "auto";
+      //   }
+      // }
     </script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script src="/javascripts/draw.js"></script>
+    <script src="/javascripts/capture.js"></script>
+    <script
+      src="https://kit.fontawesome.com/4737a162b6.js"
+      crossorigin="anonymous"
+    ></script>
   </body>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-  <script src="/javascripts/draw.js"></script>
-  <script src="/javascripts/capture.js"></script>
-  <script src="https://kit.fontawesome.com/4737a162b6.js" crossorigin="anonymous"></script>
 </html>

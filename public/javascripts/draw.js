@@ -85,17 +85,21 @@ function selectColor(color) {
 
 let selected_option = "line";
 
+
 function changeBackgroundPattern(option) {
+
+  const canvas = document.getElementById('sheet'); // Replace 'sheet' with your canvas ID
   const contentContainer = document.getElementById("sheet");
   const hasPattern = contentContainer.style.backgroundImage !== "none";
-  if (option === "dots") {
-    contentContainer.style.backgroundColor = "black";
-    contentContainer.style.opacity = "1";
-    contentContainer.style.backgroundImage =
-      "radial-gradient(#000000 0.65px, transparent 0.65px), radial-gradient(#000000 0.65px, #ffffff 0.65px)";
-    contentContainer.style.backgroundSize = "54px 54px";
-    contentContainer.style.backgroundPosition = "0 0, 27px 27px";
-  } else if (option === "paper") {
+if (option === "dots") {
+  contentContainer.style.backgroundColor = "white";
+  contentContainer.style.opacity = "1";
+  contentContainer.style.backgroundImage =
+    "radial-gradient(#000000 1.3px, transparent 1.3px), radial-gradient(#000000 1.3px, #ffffff 1.3px)";
+  contentContainer.style.backgroundSize = "108px 108px"; // Increase the size as needed
+  contentContainer.style.backgroundPosition = "0 0, 108px 108px"; // Adjust this accordingly
+}
+else if (option === "paper") {
     contentContainer.style.backgroundColor = "#ffffff";
     contentContainer.style.opacity = "1";
     contentContainer.style.backgroundImage =
@@ -124,148 +128,129 @@ function changeBackgroundPattern(option) {
   } else if (option === "none" && hasPattern) {
     // If the current background has a pattern and "blank" is selected again, remove the pattern
     contentContainer.style.backgroundImage = "none";
+    contentContainer.style.backgroundColor = "white";
   }
+  // } else if (option === "blank") {
+  //   // Clear the canvas
+  //   contentContainer.style.backgroundColor = "#ffffff";
+  //   contentContainer.style.backgroundImage="none"
+  // }
+  
+
 
   selected_option = option;
   socket.emit("change_background", option);
 }
 
-
-
-
-// socket.on("connect", () => {
-//   console.log("Connected to server");
-// });
-
-// socket.on("disconnect", () => {
-//   console.log("Disconnected from server");
-// });
-
-// Start Streaming
-// function startStreaming() {
-//   var mediaSupport = "mediaDevices" in navigator;
-
-//   if (mediaSupport && null == cameraStream) {
-//     navigator.mediaDevices
-//       .getUserMedia({ video: true })
-//       .then(function (mediaStream) {
-//         cameraStream = mediaStream;
-
-//         stream.srcObject = mediaStream;
-
-//         stream.play();
-//       })
-//       .catch(function (err) {
-//         console.log("Unable to access camera: " + err);
-//       });
-//   } else {
-//     alert("Your browser does not support media devices.");
-
-//     return;
-//   }
-// }
-
-// // Stop Streaming
-// function stopStreaming() {
-//   if (null != cameraStream) {
-//     var track = cameraStream.getTracks()[0];
-
-//     track.stop();
-//     stream.load();
-
-//     cameraStream = null;
-//   }
-// }
-
-// function captureSnapshot() {
-//   if (null != cameraStream) {
-//     var ctx = capture.getContext("2d");
-//     var img = new Image();
-
-//     ctx.drawImage(stream, 0, 0, capture.width, capture.height);
-
-//     img.src = capture.toDataURL("image/webp");
-//     img.width = 240;
-
-//     snapshot.innerHTML = "";
-
-//     snapshot.appendChild(img);
-//   }
-// }
-
-// function setBackgroundAndBroadcast() {
-//   if (snapshot.children.length > 0) {
-//     const img = snapshot.children[0];
-//     const canvas = document.getElementById("sheet");
-//     const context = canvas.getContext("2d");
-
-//     // Set the captured image as the canvas background
-//     context.clearRect(0, 0, canvas.width, canvas.height);
-//     context.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-//     // Broadcast the background image data to other users
-//     const imageData = canvas.toDataURL("image/webp");
-//     socket.emit("setBackgroundImage", imageData);
-//     console.log('Image added and broadcasted');
-//   }
-// }
-
-// // Add an event listener for the "Set Background" button
-// const setBackgroundButton = document.getElementById("set-background-btn");
-// setBackgroundButton.addEventListener("click", setBackgroundAndBroadcast);
 var socket = io.connect();
-			
-socket.on('connect', function() {
+
+socket.on("connect", function () {
   console.log("Connected");
 });
 
-socket.on('video', function(data) {
+socket.on("video", function (data) {
   // Set the received image data as the background of the sheet canvas
-  const sheetCanvas = document.getElementById('sheet'); // Get the sheet canvas
+  const sheetCanvas = document.getElementById("sheet"); // Get the sheet canvas
   sheetCanvas.style.backgroundImage = `url(${data})`; // Set the background image
   console.log(data);
 });
 
-window.addEventListener('load', function() {
+window.addEventListener("load", function () {
   let hideimg = document.getElementById("theimage");
-  let video = document.getElementById('myvideo');
-  video.style.display = 'none';
-  hideimg.style.border = 'none';
-  hideimg.style.display = 'none';
+  let video = document.getElementById("myvideo");
+  video.style.display = "none";
+  hideimg.style.border = "none";
+  hideimg.style.display = "none";
 
   let constraints = { audio: true, video: true };
 
   // Prompt the user for permission, get the stream
-  navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
-    /* Use the stream */
+  navigator.mediaDevices
+    .getUserMedia(constraints)
+    .then(function (stream) {
+      /* Use the stream */
 
-    // Attach to our video object
-    video.srcObject = stream;
+      // Attach to our video object
+      video.srcObject = stream;
 
-    // Wait for the stream to load enough to play
-    video.onloadedmetadata = function(e) {
-      // console.log(e);
-      video.play();
-      draw();
-    };
-  }).catch(function(err) {
-    /* Handle the error */
-    alert(err);  
-  });
+      // Wait for the stream to load enough to play
+      video.onloadedmetadata = function (e) {
+        // console.log(e);
+        video.play();
+        draw();
+      };
+    })
+    .catch(function (err) {
+      /* Handle the error */
+      alert(err);
+    });
 
   function draw() {
-    let videoCanvas = document.getElementById('video-canvas'); // Use separate canvas variable
+    let videoCanvas = document.getElementById("video-canvas"); // Use separate canvas variable
     let videoContext = videoCanvas.getContext("2d"); // Use separate context variable
     videoContext.drawImage(video, 0, 0, videoCanvas.width, videoCanvas.height);
+  
+  
 
     requestAnimationFrame(draw);
   }
+  let videoCanvas = document.getElementById("video-canvas");
+  videoCanvas.style.display = "none";
+  const drawingcanvas= document.getElementById('sheet')
+  const startbtn = document.getElementById("start");
+  const stopbtn = document.getElementById("stop");
+  const photobtn = document.getElementById("photo-button");
+  const startStopContainer = document.getElementById("startStopContainer");
+  const colorcanvas = document.getElementsByClassName("color-choice");
+  const sheetCanvas = document.getElementById("sheet");
+  const videoElement = document.getElementById("captured-video");
+  const downloadButton = document.getElementById("download-button");
+  const drawingdiv= document.getElementById('drawing-material')
+  const flexcont=document.getElementById('flex-container')
 
-  const photobutton = document.getElementById('photo-button');
-  photobutton.addEventListener('click', function(e) {
-    let videoCanvas = document.getElementById('video-canvas');
+  downloadButton.addEventListener('click', ()=>{
+    videoElement.style.display='none'
+    sheetCanvas.width = 1700;
+    downloadButton.style.display='none'
+  })
+  
+  // Initially, hide the "Stop" button
+  stopbtn.style.display = "none";
+  photobtn.style.display = "none";
+  startbtn.addEventListener("click", () => {
+    videoCanvas.style.display = "block";
+    drawingdiv.style.display='none'
+
+    flexcont.style.display='block'
+    startStopContainer.style.display = "flex"; // Show the container
+    startbtn.style.display = "none";
+    stopbtn.style.display = "flex"; // Show the "Stop" button
+    photobtn.style.display = "block";
+    photobtn.style.display = "flex";
+    sheetCanvas.width = 1000;
+    colorcanvas.style.display='none'
+  });
+  
+  stopbtn.addEventListener("click", () => {
+    videoCanvas.style.display = "none";
+    drawingcanvas.style.width='1700'
+    drawingdiv.style.display='block'
+    flexcont.style.display='flex'
+    drawingdiv.style.marginLeft= '10vw'
+    startStopContainer.style.display = "flex"; // Show the container
+    startbtn.style.display = "flex"; // Show the "Start" button
+    stopbtn.style.display = "none";
+    photobtn.style.display = "none";
+    sheetCanvas.width = 1700;
+    colorcanvas.style.display='none'
+  });
+  
+
+  const photobutton = document.getElementById("photo-button");
+  photobutton.addEventListener("click", function (e) {
+    let videoCanvas = document.getElementById("video-canvas");
     let videoContext = videoCanvas.getContext("2d");
-    let sheetCanvas = document.getElementById('sheet'); // Use separate canvas for sheet
+    let sheetCanvas = document.getElementById("sheet"); // Use separate canvas for sheet
     let sheetContext = sheetCanvas.getContext("2d"); // Use separate context for sheet
 
     // Capture the current frame from the video and draw it on the video canvas
@@ -274,11 +259,34 @@ window.addEventListener('load', function() {
     // Set the captured image as the background of the sheet canvas
     const imageData = videoCanvas.toDataURL("image/webp");
     sheetCanvas.style.backgroundImage = `url(${imageData})`;
-
+    sheetCanvas.style.background = "no-repeat";
+    sheetCanvas.style.backgroundSize = "cover"; 
     // Optionally, you can clear the video canvas if you want to remove the drawn content
     videoContext.clearRect(0, 0, videoCanvas.width, videoCanvas.height);
 
     // Emit the captured image to other users via Socket.io
     socket.emit("video", imageData);
-  });
+  }); 
+
+  // const navbtn = document.getElementById("menu-icon");
+  // const collapseNavbar = document.querySelector(".collapse-navbar");
+
+  // navbtn.addEventListener("click", () => {
+  //   if (collapseNavbar.style.display === "none" || collapseNavbar.style.display === "") {
+  //     collapseNavbar.style.display = "block";
+  //   } else {
+  //     collapseNavbar.style.display = "none";
+  //   }
+  // });
 });
+
+// window.addEventListener("load", function () {
+
+//   // const navbtn= document.getElementById('menu-icon')
+//   // // const nav- document.getElementById('collapse-navbar')
+//   // navbtn.addEventListener('click', ()=>{
+//   //   const navitems= document.getElementById('collapse-navbar')
+//   //   navitems.style.backgroundColor='red'
+//   //   navitems.style.display='none'
+//   // })
+// })
