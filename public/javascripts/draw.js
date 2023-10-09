@@ -88,7 +88,8 @@ let selected_option = "line";
 
 function changeBackgroundPattern(option) {
 
-  const canvas = document.getElementById('sheet'); // Replace 'sheet' with your canvas ID
+  const canvas = document.getElementById('sheet'); 
+  const context = canvas.getContext("2d");
   const contentContainer = document.getElementById("sheet");
   const hasPattern = contentContainer.style.backgroundImage !== "none";
 if (option === "dots") {
@@ -100,6 +101,7 @@ if (option === "dots") {
   contentContainer.style.backgroundPosition = "0 0, 108px 108px"; // Adjust this accordingly
 }
 else if (option === "paper") {
+  
     contentContainer.style.backgroundColor = "#ffffff";
     contentContainer.style.opacity = "1";
     contentContainer.style.backgroundImage =
@@ -227,7 +229,7 @@ window.addEventListener("load", function () {
     stopbtn.style.display = "flex"; // Show the "Stop" button
     photobtn.style.display = "block";
     photobtn.style.display = "flex";
-    sheetCanvas.width = 1000;
+    sheetCanvas.width = 1500;
     colorcanvas.style.display='none'
   });
   
@@ -252,6 +254,7 @@ window.addEventListener("load", function () {
     let videoContext = videoCanvas.getContext("2d");
     let sheetCanvas = document.getElementById("sheet"); // Use separate canvas for sheet
     let sheetContext = sheetCanvas.getContext("2d"); // Use separate context for sheet
+    const drawingdiv= document.getElementById('drawing-material')
 
     // Capture the current frame from the video and draw it on the video canvas
     videoContext.drawImage(video, 0, 0, videoCanvas.width, videoCanvas.height);
@@ -261,6 +264,8 @@ window.addEventListener("load", function () {
     sheetCanvas.style.backgroundImage = `url(${imageData})`;
     sheetCanvas.style.background = "no-repeat";
     sheetCanvas.style.backgroundSize = "cover"; 
+    videoCanvas.style.display= "none"
+    drawingdiv.style.display="block"
     // Optionally, you can clear the video canvas if you want to remove the drawn content
     videoContext.clearRect(0, 0, videoCanvas.width, videoCanvas.height);
 

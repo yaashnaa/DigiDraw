@@ -247,22 +247,6 @@ margin: 1rem;
 }
 
 
-.collapse-navbar{
-  /* display: flex;
-  flex-direction: column;
-  height: 100vh;
-  width: 100%;
-  background-color: #1f2224;
-  background-blend-mode: multiply;
-  margin-right: 2rem;
-  gap: 10vh;
-  font-size: 2rem;
-  padding: 2rem;
-  margin: 0;
-  justify-content: center; */
-
-}
-
 .drawing-cont{
   margin-left: 15vw;
   display: flex;
